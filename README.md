@@ -2,7 +2,7 @@
 
 ReAMV build a randomically generated AMV. That is all
 
-## Prerequisites
+## Dependencies
 
 - FFmpeg `>= 4.2.3`
 - Python `>= 3.8.3`
