@@ -1,6 +1,8 @@
 # ReAMV
 
-ReAMV build a randomically generated AMV. That is all
+ReAMV creates a randomically generated Anime Music Video
+
+## Example
 
 ## Dependencies
 
