@@ -1,6 +1,6 @@
 # ReAMV
 
-ReAMV creates a randomically generated Anime Music Video
+ReAMV creates a randomly generated Anime Music Video
 
 ## Example
 
