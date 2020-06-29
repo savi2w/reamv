@@ -1,7 +1,11 @@
 {
   "name": "reamv",
-  "version": "0.1.4",
+  "version": "0.1.5",
+  "bin": {
+    "reamv": "bin/reamv"
+  },
   "main": "src/Index.bs.js",
+  "types": "src/Index.d.ts",
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
