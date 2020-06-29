@@ -1,0 +1,37 @@
+{
+  "name": "reamv",
+  "version": "0.1.8",
+  "bin": {
+    "reamv": "bin/reamv"
+  },
+  "main": "src/Index.bs.js",
+  "types": "src/Index.d.ts",
+  "scripts": {
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weslenng/reamv.git"
+  },
+  "keywords": [
+    "reamv"
+  ],
+  "author": "weslenng <weslenng@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weslenng/reamv/issues"
+  },
+  "homepage": "https://github.com/weslenng/reamv#readme",
+  "dependencies": {
+    "bs-platform": "^8.0.2",
+    "cheerio": "^1.0.0-rc.3",
+    "ffmpeg-concat": "^1.1.0",
+    "temp-dir": "^2.0.0",
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {
+    "bs-let": "^0.1.16"
+  }
+}
