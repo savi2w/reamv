@@ -1,8 +1,10 @@
 # ReAMV
 
-ReAMV creates a randomly generated Anime Music Video
+Don't judge me, I'm in quarantine with nothing to do 🤷
 
 ## Example
+
+[![Screenshot of a anime music video](https://i.imgur.com/k1fijBW.png)](https://youtu.be/0iaD8gVGXMI)
 
 ## Dependencies
 
