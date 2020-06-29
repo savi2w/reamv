@@ -30,10 +30,12 @@ external join: array(string) => string = "join";
 let get_uuid = v4;
 
 let bootstrap = () => {
+  open Js.Promise;
+
   let folder = [|temp_dir, ()->get_uuid|]->join;
   let%Async artifacts =
-    Js.Promise.all([|folder->prepare_episode, folder->prepare_music|]);
+    [|folder->prepare_episode, folder->prepare_music|]->all;
 
   let%Async result = artifacts[0]->concat_files(artifacts[1][0], folder);
-  result->Js.Promise.resolve;
+  result->resolve;
 };
