@@ -15,7 +15,7 @@ ReAMV build a randomically generated AMV. That is all
 ```javascript
 import reamv from "reamv";
 
-const fileName = reamv.bootstrap();
+const amv = await reamv.bootstrap();
 ```
 
 ### CLI
