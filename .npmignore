@@ -1,0 +1,13 @@
+# See http://npm.github.io/publishing-pkgs-docs/publishing/the-npmignore-file.html for more about ignoring files.
+
+/lib/bs
+/node_modules
+
+/.bsb.lock
+/.merlin
+/.vscode
+
+/yarn-debug.log*
+/yarn-error.log*
+
+/src/**/*.re

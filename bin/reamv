@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+const reamv = require("../src/Index.bs");
+
+reamv.bootstrap();

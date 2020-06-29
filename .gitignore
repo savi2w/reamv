@@ -1,0 +1,13 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+/lib/bs
+/node_modules
+
+/.bsb.lock
+/.merlin
+/.vscode
+
+/yarn-debug.log*
+/yarn-error.log*
+
+/src/**/*.js
