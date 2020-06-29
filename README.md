@@ -17,9 +17,9 @@ Don't judge me, I'm in quarantine with nothing to do 🤷
 ### API
 
 ```javascript
-import reamv from "reamv";
+const reamv = require("reamv");
 
-const amv = await reamv.bootstrap();
+const result = await reamv.bootstrap();
 ```
 
 ### CLI

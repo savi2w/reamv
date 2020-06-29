@@ -2,4 +2,6 @@
 
 const reamv = require("../src/Index.bs");
 
-reamv.bootstrap();
+reamv.bootstrap().then((result) => {
+  console.log("Successfully generated AMV in: ", result);
+});

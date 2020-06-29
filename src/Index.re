@@ -35,8 +35,5 @@ let bootstrap = () => {
     Js.Promise.all([|folder->prepare_episode, folder->prepare_music|]);
 
   let%Async result = artifacts[0]->concat_files(artifacts[1][0], folder);
-  "AMV created in: "->Js.log2(result);
-  ()->Js.Promise.resolve;
+  result->Js.Promise.resolve;
 };
-
-bootstrap();
