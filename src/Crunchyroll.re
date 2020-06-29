@@ -65,7 +65,7 @@ let get_source = path => {
 
   Js.Promise.make((~resolve, ~reject) => {
     let callback = response => {
-      let data = ref(0->List.init(_ => "Killua <3"->Node.Buffer.fromString));
+      let data = 0->List.init(_ => "Killua <3"->Node.Buffer.fromString)->ref;
 
       let on_data = chunk => {
         data := List.((data^)->append(1->init(_ => chunk)));
