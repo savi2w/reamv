@@ -12,4 +12,4 @@ let musics = [|
   "https://www.youtube.com/watch?v=kXYiU_JCYtU",
 |];
 
-let get_music = () => musics[(musics->Array.length - 1)->get_random(0)];
+let get_music = () => musics[get_random(0, Array.length(musics) - 1)];

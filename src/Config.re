@@ -38,8 +38,8 @@ let chunk = {
   },
 };
 
-let crunchyroll = {hostname: "www.crunchyroll.com", popular: 1};
+let crunchyroll = {hostname: "www.crunchyroll.com", popular: 2};
 
 let transition = {maximum: 300, minimum: 200};
 
-let video_quality = "worst";
+let video_quality = "best";

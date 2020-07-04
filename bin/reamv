@@ -2,6 +2,12 @@
 
 const reamv = require("../src/Index.bs");
 
-reamv.bootstrap().then((result) => {
-  console.log("Successfully generated AMV in: ", result);
-});
+reamv
+  .bootstrap()
+  .then((result) => {
+    console.log("Successfully generated AMV in: ", result);
+  })
+  .catch((err) => {
+    console.error("Oops, something went wront: ", err);
+    process.exit(1);
+  });

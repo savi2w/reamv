@@ -20,20 +20,19 @@ external join: array(string) => string = "join";
 [@bs.module] external concat: concat => Js.Promise.t(unit) = "ffmpeg-concat";
 
 let concat_files = (episode, music, folder) => {
-  let output = [|folder, "output.mp4"|]->join;
+  let output = [|folder, "output.mp4"|] |> join;
   let names = [|"fade", "fadegrayscale", "crosszoom"|];
 
   let transitions =
-    (episode->Array.length - 1)
-    ->Array.init(_ =>
-        {
-          duration: transition.maximum->get_random(transition.minimum),
-          name: names[(names->Array.length - 1)->get_random(0)],
-        }
-      );
+    Array.init(Array.length(episode) - 1, _ =>
+      {
+        duration: get_random(transition.minimum, transition.maximum),
+        name: names[get_random(0, Array.length(names) - 1)],
+      }
+    );
 
-  let%Async _ = {audio: music, output, transitions, videos: episode}->concat;
-  output->Js.Promise.resolve;
+  let%Async _ = concat({audio: music, output, transitions, videos: episode});
+  output |> Js.Promise.resolve;
 };
 
 let get_duration = file_path => {
@@ -43,40 +42,37 @@ let get_duration = file_path => {
     ++ "\" -show_entries format=duration -loglevel quiet -print_format csv";
 
   let%Async result = exec_async(. command);
-  let duration =
-    '.'
-    ->String.split_on_char(
-        ','->String.split_on_char(result.stdout)->List.nth(1),
-      )
-    ->List.hd
-    ->int_of_string;
 
-  duration->Js.Promise.resolve;
+  let float_duration = List.nth(String.split_on_char(',', result.stdout), 1);
+  let int_duration =
+    String.split_on_char('.', float_duration) |> List.hd |> int_of_string;
+
+  int_duration |> Js.Promise.resolve;
 };
 
 let split_file = (file_path, folder) => {
   open Js.Promise;
 
   let get_fragment = (index, chunk) => {
-    let fragment = [|folder, index->string_of_int ++ ".mp4"|]->join;
+    let fragment = [|folder, string_of_int(index) ++ ".mp4"|] |> join;
     let command =
       "ffmpeg -ss "
-      ++ chunk.start->string_of_int
+      ++ string_of_int(chunk.start)
       ++ " -i \""
       ++ file_path
       ++ "\" -t "
-      ++ chunk.duration->string_of_int
+      ++ string_of_int(chunk.duration)
       ++ " -c copy \""
       ++ fragment
       ++ "\"";
 
     let%Async _ = exec_async(. command);
-    fragment->resolve;
+    fragment |> resolve;
   };
 
-  let%Async duration = file_path->get_duration;
+  let%Async duration = file_path |> get_duration;
   let%Async fragments =
-    get_fragment->List.mapi(duration->get_chunk)->Array.of_list->all;
+    List.mapi(get_fragment, duration |> get_chunk) |> Array.of_list |> all;
 
-  fragments->resolve;
+  fragments |> resolve;
 };

@@ -1,10 +1,9 @@
-let get_random = (maximum, minimum) => {
+let get_random = (minimum, maximum) => {
   let inclusive = 1;
+  let random =
+    Js_math.random() *. float_of_int(maximum - minimum + inclusive);
 
-  Js_math.(
-    (()->random *. (maximum - minimum + inclusive)->float_of_int)->floor_int
-    + minimum
-  );
+  (random |> Js_math.floor_int) + minimum;
 };
 
 type chunk = {
@@ -20,14 +19,15 @@ let get_chunk = {
     let fg =
       (duration - chunk.offset.ending - chunk.offset.opening) / chunk.fragments;
 
-    chunk.fragments
-    ->List.init(fragment =>
-        {
-          duration: chunk.size.maximum->get_random(chunk.size.minimum),
-          start:
-            (chunk.offset.opening + fg * (fragment + next_chunk))
-            ->get_random(chunk.offset.opening + fg * fragment),
-        }
-      );
+    List.init(chunk.fragments, fragment =>
+      {
+        duration: get_random(chunk.size.minimum, chunk.size.maximum),
+        start:
+          get_random(
+            chunk.offset.opening + fg * fragment,
+            chunk.offset.opening + fg * (fragment + next_chunk),
+          ),
+      }
+    );
   };
 };

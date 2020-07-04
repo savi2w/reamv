@@ -5,7 +5,7 @@ open Exec;
 external join: array(string) => string = "join";
 
 let from_crunchyroll = (url, folder) => {
-  let file_path = [|folder, "input"|]->join;
+  let file_path = [|folder, "input"|] |> join;
   let command =
     "youtube-dl --format "
     ++ video_quality
@@ -16,16 +16,16 @@ let from_crunchyroll = (url, folder) => {
     ++ "\"";
 
   let%Async _ = exec_async(. command);
-  (file_path ++ ".mp4")->Js.Promise.resolve;
+  file_path ++ ".mp4" |> Js.Promise.resolve;
 };
 
 let from_youtube = (url, folder) => {
-  let file_path = [|folder, "music"|]->join;
+  let file_path = [|folder, "music"|] |> join;
   let command =
     "youtube-dl --format "
     ++ video_quality
     ++ " --youtube-skip-dash-manifest --extract-audio --audio-format mp3 --audio-quality "
-    ++ audio_quality->string_of_int
+    ++ string_of_int(audio_quality)
     ++ " -o \""
     ++ file_path
     ++ ".%(ext)s\" \""
@@ -33,5 +33,5 @@ let from_youtube = (url, folder) => {
     ++ "\"";
 
   let%Async _ = exec_async(. command);
-  [|file_path ++ ".mp3"|]->Js.Promise.resolve;
+  [|file_path ++ ".mp3"|] |> Js.Promise.resolve;
 };

@@ -8,17 +8,17 @@ open Util;
 let prepare_episode = folder => {
   let popular =
     "/videos/anime/popular/ajax_page?pg="
-    ++ crunchyroll.popular->get_random(0)->string_of_int;
+    ++ string_of_int(get_random(0, crunchyroll.popular));
 
-  let%Async anime = popular->get_anime;
-  let%Async episode = anime->get_episode;
-  let%Async file_path = episode->from_crunchyroll(folder);
+  let%Async anime = popular |> get_anime;
+  let%Async episode = anime |> get_episode;
+  let%Async file_path = folder |> from_crunchyroll(episode);
 
-  file_path->split_file(folder);
+  folder |> split_file(file_path);
 };
 
 let prepare_music = folder => {
-  ()->get_music->from_youtube(folder);
+  folder |> from_youtube(get_music());
 };
 
 [@bs.module "path"] [@bs.variadic]
@@ -32,10 +32,10 @@ let get_uuid = v4;
 let bootstrap = () => {
   open Js.Promise;
 
-  let folder = [|temp_dir, ()->get_uuid|]->join;
+  let folder = [|temp_dir, get_uuid()|] |> join;
   let%Async artifacts =
-    [|folder->prepare_episode, folder->prepare_music|]->all;
+    [|folder |> prepare_episode, folder |> prepare_music|] |> all;
 
-  let%Async result = artifacts[0]->concat_files(artifacts[1][0], folder);
-  result->resolve;
+  let%Async result = concat_files(artifacts[0], artifacts[1][0], folder);
+  result |> resolve;
 };

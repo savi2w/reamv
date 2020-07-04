@@ -65,15 +65,17 @@ let get_source = path => {
 
   Js.Promise.make((~resolve, ~reject) => {
     let callback = response => {
-      let data = 0->List.init(_ => "Killua <3"->Node.Buffer.fromString)->ref;
+      let data = ref(List.init(0, _ => Node.Buffer.fromString("Killua <3")));
 
       let on_data = chunk => {
-        data := List.((data^)->append(1->init(_ => chunk)));
+        let next = List.init(1, _ => chunk);
+        data := List.append(data^, next);
         ();
       };
 
-      let on_end = () =>
-        resolve(. Node.Buffer.((data^)->Array.of_list->concat->toString));
+      let on_end = () => {
+        resolve(. Node.Buffer.(Array.of_list(data^) |> concat |> toString));
+      };
 
       let on_error = exn => reject(. exn);
       let _ =
@@ -91,22 +93,24 @@ let get_source = path => {
 };
 
 let get_anime = popular => {
-  let%Async source = popular->get_source;
-  let anchors = source->get_anchors;
-  let path = anchors[(anchors->Array.length - 1)->get_random(0)];
+  let%Async source = popular |> get_source;
+  let anchors = source |> get_anchors;
+  let path = anchors[get_random(0, Array.length(anchors) - 1)];
 
-  path->Js.Promise.resolve;
+  path |> Js.Promise.resolve;
 };
 
 let get_episode = anime => {
-  let%Async source = anime->get_source;
+  let%Async source = anime |> get_source;
   let anchors =
-    Js.String.includes("episode")
-    ->List.filter(source->get_anchors->Array.to_list)
-    ->Array.of_list;
+    List.filter(
+      anchor => Js.String.includes("episode", anchor),
+      source |> get_anchors |> Array.to_list,
+    )
+    |> Array.of_list;
 
-  let path = anchors[(anchors->Array.length - 1)->get_random(0)];
+  let path = anchors[get_random(0, Array.length(anchors) - 1)];
   let url = "https://" ++ crunchyroll.hostname ++ path;
 
-  url->Js.Promise.resolve;
+  url |> Js.Promise.resolve;
 };

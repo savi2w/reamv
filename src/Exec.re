@@ -8,4 +8,4 @@ type exec_result = {stdout: string};
 external promisify: exec_callback => (. string) => Js.Promise.t(exec_result) =
   "promisify";
 
-let exec_async = exec->promisify;
+let exec_async = exec |> promisify;

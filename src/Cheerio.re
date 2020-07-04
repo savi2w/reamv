@@ -8,6 +8,6 @@ type cheerio = {toArray: (. unit) => array(element)};
 external load: (. string) => (. string) => cheerio = "load";
 
 let get_anchors = source => {
-  (element => element.attribs.href)
-  ->Array.map((load(. source))(. "a").toArray(.));
+  let anchors = (load(. source))(. "a").toArray(.);
+  Array.map(element => element.attribs.href, anchors);
 };
