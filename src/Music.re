@@ -10,6 +10,11 @@ let musics = [|
   "https://www.youtube.com/watch?v=mz_9N3Ggz38",
   "https://www.youtube.com/watch?v=eVTXPUF4Oz4",
   "https://www.youtube.com/watch?v=kXYiU_JCYtU",
+  "https://www.youtube.com/watch?v=BpwCJzPlz8k",
+  "https://www.youtube.com/watch?v=GB8G5YQgqcQ",
+  "https://www.youtube.com/watch?v=iYcbfc_UB6M",
+  "https://www.youtube.com/watch?v=09LTT0xwdfw",
+  "https://www.youtube.com/watch?v=u9NStVkSCuk",
 |];
 
 let get_music = () => musics[get_random(0, Array.length(musics) - 1)];
