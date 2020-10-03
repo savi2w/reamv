@@ -42,4 +42,4 @@ let crunchyroll = {hostname: "www.crunchyroll.com", popular: 2};
 
 let transition = {maximum: 300, minimum: 200};
 
-let video_quality = "best";
+let video_quality = "worst";

@@ -1,6 +1,6 @@
 {
   "name": "reamv",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "bin": {
     "reamv": "bin/reamv"
   },
