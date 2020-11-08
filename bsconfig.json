@@ -1,6 +1,6 @@
 {
   "name": "reamv",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "sources": {
     "dir": "src",
     "subdirs": true
