@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weslenng/reamv.git"
+    "url": "git+https://github.com/omppye/reamv.git"
   },
   "keywords": [
     "reamv"
   ],
-  "author": "Weslen Guerreiro <weslenng@outlook.com>",
+  "author": "Weslen Guerreiro <omppye@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/weslenng/reamv/issues"
+    "url": "https://github.com/omppye/reamv/issues"
   },
-  "homepage": "https://github.com/weslenng/reamv#readme",
+  "homepage": "https://github.com/omppye/reamv#readme",
   "dependencies": {
     "bs-platform": "^8.0.3",
     "cheerio": "^1.0.0-rc.3",
