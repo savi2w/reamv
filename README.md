@@ -1,5 +1,9 @@
 # ReAMV
 
+⚠️ Deprecated
+
+***
+
 Don't judge me, I'm in quarantine with nothing to do 🤷
 
 ## Example
