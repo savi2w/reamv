@@ -1,0 +1,6 @@
+/.bsb.lock
+/.merlin
+/.vscode
+/lib/bs
+/node_modules
+/src/**/*.js
